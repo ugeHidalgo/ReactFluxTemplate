@@ -19,6 +19,7 @@ var config = {
 			'node_modules/bootstrap/dist/css/bootstrap.min.css',
 			'node_modules/bootstrap/dist/css/bootstrap-theme.min.css'
 		],
+		images: './src/images/*',
 		dist: './dist',
 		mainJs: './src/main.js'
 	}
@@ -53,6 +54,18 @@ gulp.task('html', function (){
 });
 
 //Task #4 ------------------------
+//Copy images files to dist when building
+gulp.task('images', function (){
+	gulp.src (config.paths.images) //Copia las imágenes
+		.pipe(gulp.dest(config.paths.dist+'/images')) //los pone en el dest
+		.pipe(connect.reload()); //Recarga
+
+	//Publish favicon
+	gulp.src('./src/favicon.ico')
+		.pipe(gulp.dest(config.paths.dist));
+});
+
+//Task #5 ------------------------
 //Browserify js files
 gulp.task('js', function (){
 	browserify(config.paths.mainJs)
@@ -64,7 +77,7 @@ gulp.task('js', function (){
 		.pipe(connect.reload());  //recarga todo
 });
 
-//Task #5 ------------------------
+//Task #6 ------------------------
 //Concat css files
 gulp.task('css', function (){
 	gulp.src(config.paths.css)
@@ -72,7 +85,7 @@ gulp.task('css', function (){
 		.pipe(gulp.dest(config.paths.dist + '/css'));
 });
 
-//Task #6 ------------------------
+//Task #7 ------------------------
 //Lint js and jsx files
 gulp.task('lint', function (){
 	return gulp.src(config.paths.js)
@@ -88,6 +101,5 @@ gulp.task('watch', function () {
 });
 
 //Default Task ------------------------
-//Lanza todas las anteriores (1 a 6 y la watch).
-gulp.task('default', ['html', 'js', 'css', 'lint','open', 'watch']);
-
+//Lanza todas las anteriores (1 a 7 y la watch).
+gulp.task('default', ['html', 'images', 'js', 'css', 'lint','open', 'watch']);
