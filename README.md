@@ -44,7 +44,7 @@ copiados, browserifados y concatenados.
 	
 	npm install --save browserify reactify vinyl-source-stream
 
-8º Instalar bottstrap y jquery para la UI y gulp-concat para concatenar los ficheros js en un único fichero
+8º Instalar bootstrap y jquery para la UI y gulp-concat para concatenar los ficheros js en un único fichero
 
 	npm install --save bootstrap jquery gulp-concat
 	
